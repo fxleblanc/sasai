@@ -9,18 +9,22 @@ import sys
 import threading
 
 k = PyKeyboard()
+# Lock for each delay
 lock = threading.Lock()
+
+# Lane Lock to prevent spamming in one direction at the detriment of other directions
 lane_lock_delay = 0.3
 toplock = threading.Lock()
 midlock = threading.Lock()
 botlock = threading.Lock()
 
 def signal_handler(signal, frame):
+    "Close everything with SIGINT"
     cv2.destroyAllWindows()
     sys.exit(0)
 
 def top(x):
-    delay = ((x - 325) / (500 - 325)) / 30
+    delay = ((x - 325) / (500 - 325)) / 5
     print(x,delay)
     sleep(delay)
     toplock.acquire()
@@ -31,7 +35,7 @@ def top(x):
     toplock.release()
 
 def right(x):
-    delay = ((x - 325) / (500 - 325)) / 30
+    delay = ((x - 325) / (500 - 325)) / 5
     print(x,delay)
     sleep(delay)
     midlock.acquire()
@@ -42,7 +46,7 @@ def right(x):
     midlock.release()
 
 def down(x):
-    delay = ((x - 325) / (500 - 325)) / 30
+    delay = ((x - 325) / (500 - 325)) / 5
     print(x,delay)
     sleep(delay)
     botlock.acquire()
@@ -53,6 +57,8 @@ def down(x):
     botlock.release()
 
 def capture_image():
+
+    # HSV Red bounds
     lower = (110, 100, 100)
     higher = (130, 255, 255)
     x = botright[0] - topleft[0]
@@ -81,6 +87,7 @@ def capture_image():
         cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
         if len(cnts) > 0:
             for contour in cnts:
+                # Find coordinates and start threads
                 ((x, y), radius) = cv2.minEnclosingCircle(contour)
                 if x <= 500 and x >= 325 and y <= 180:
                     t = threading.Thread(name='thread_top', target=top, args=(x,))
