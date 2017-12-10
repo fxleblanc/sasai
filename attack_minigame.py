@@ -4,11 +4,11 @@ import threading
 from time import sleep
 import signal
 
-from pymouse import PyMouseEvent
 from pykeyboard import PyKeyboard
 import pyscreenshot as ImageGrab
 import cv2
 import numpy as np
+from capture_rectangle import CaptureRectangle
 
 k = PyKeyboard()
 # Lock for each delay
@@ -111,36 +111,6 @@ def capture_image(capture_rectangle):
                     action_thread.setDaemon(True)
                     action_thread.start()
 
-
-class CaptureRectangle(PyMouseEvent):
-    """Identify the corners that capture_image is going to use in order to deal with the image"""
-    def __init__(self, stop_action):
-        PyMouseEvent.__init__(self)
-        self.clicks = 0
-        self.topleft = (0, 0)
-        self.botright = (0, 0)
-        self.stop_action = stop_action
-
-    def click(self, x, y, button, press):
-        if button == 1:
-            if press:
-                print("Click")
-                if self.clicks == 0:
-                    print("Top left corner")
-                    self.topleft = (x, y)
-                    self.clicks += 1
-                elif self.clicks == 1:
-                    print("Bottom Right corner")
-                    self.botright = (x, y)
-                    self.stop()
-        else:
-            self.stop()
-
-    def stop(self):
-        print(self.topleft[0], self.topleft[1])
-        print(self.botright[0], self.botright[1])
-        self.stop_action(self)
-        PyMouseEvent.stop(self)
 
 signal.signal(signal.SIGINT, signal_handler)
 CAPTURE_RECTANGLE = CaptureRectangle(capture_image)
