@@ -15,10 +15,10 @@ k = PyKeyboard()
 LOCK = threading.Lock()
 
 # Lane Lock to prevent spamming in one direction at the detriment of other directions
-lane_lock_delay = 0.3
-toplock = threading.Lock()
-midlock = threading.Lock()
-botlock = threading.Lock()
+LANE_LOCK_DELAY = 0.3
+TOPLOCK = threading.Lock()
+MIDLOCK = threading.Lock()
+BOTLOCK = threading.Lock()
 
 def signal_handler(signal, frame):
     "Close everything with SIGINT"
@@ -29,34 +29,34 @@ def top(x):
     delay = ((x - 325) / (500 - 325)) / 5
     print(x,delay)
     sleep(delay)
-    toplock.acquire()
+    TOPLOCK.acquire()
     LOCK.acquire()
     k.tap_key('Up')
     LOCK.release()
-    sleep(lane_lock_delay)
-    toplock.release()
+    sleep(LANE_LOCK_DELAY)
+    TOPLOCK.release()
 
 def right(x):
     delay = ((x - 325) / (500 - 325)) / 5
     print(x,delay)
     sleep(delay)
-    midlock.acquire()
+    MIDLOCK.acquire()
     LOCK.acquire()
     k.tap_key('Right')
     LOCK.release()
-    sleep(lane_lock_delay)
-    midlock.release()
+    sleep(LANE_LOCK_DELAY)
+    MIDLOCK.release()
 
 def down(x):
     delay = ((x - 325) / (500 - 325)) / 5
     print(x,delay)
     sleep(delay)
-    botlock.acquire()
+    BOTLOCK.acquire()
     LOCK.acquire()
     k.tap_key('Down')
     LOCK.release()
-    sleep(lane_lock_delay)
-    botlock.release()
+    sleep(LANE_LOCK_DELAY)
+    BOTLOCK.release()
 
 def capture_image():
 
