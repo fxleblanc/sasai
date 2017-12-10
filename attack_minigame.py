@@ -62,6 +62,7 @@ def down(pos_x):
     BOTLOCK.release()
 
 def capture_image():
+    """Capture image, detect apples and launch thread for the appropriate direction"""
 
     # HSV Red bounds
     lower = (110, 100, 100)
