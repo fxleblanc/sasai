@@ -28,7 +28,7 @@ def signal_handler():
 def top(pos_x):
     """Top attack"""
     delay = ((pos_x - 325) / (500 - 325)) / 5
-    print(pos_x,delay)
+    print(pos_x, delay)
     sleep(delay)
     TOPLOCK.acquire()
     LOCK.acquire()
@@ -40,7 +40,7 @@ def top(pos_x):
 def right(pos_x):
     """Right attack"""
     delay = ((pos_x - 325) / (500 - 325)) / 5
-    print(pos_x,delay)
+    print(pos_x, delay)
     sleep(delay)
     MIDLOCK.acquire()
     LOCK.acquire()
@@ -52,7 +52,7 @@ def right(pos_x):
 def down(pos_x):
     """Down attack"""
     delay = ((pos_x - 325) / (500 - 325)) / 5
-    print(pos_x,delay)
+    print(pos_x, delay)
     sleep(delay)
     BOTLOCK.acquire()
     LOCK.acquire()
