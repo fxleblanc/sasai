@@ -20,7 +20,7 @@ TOPLOCK = threading.Lock()
 MIDLOCK = threading.Lock()
 BOTLOCK = threading.Lock()
 
-def signal_handler(signal, frame):
+def signal_handler():
     "Close everything with SIGINT"
     cv2.destroyAllWindows()
     sys.exit(0)
