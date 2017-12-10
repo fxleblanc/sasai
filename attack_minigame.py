@@ -25,9 +25,9 @@ def signal_handler():
     cv2.destroyAllWindows()
     sys.exit(0)
 
-def top(x):
-    delay = ((x - 325) / (500 - 325)) / 5
-    print(x,delay)
+def top(pos_x):
+    delay = ((pos_x - 325) / (500 - 325)) / 5
+    print(pos_x,delay)
     sleep(delay)
     TOPLOCK.acquire()
     LOCK.acquire()
@@ -36,9 +36,9 @@ def top(x):
     sleep(LANE_LOCK_DELAY)
     TOPLOCK.release()
 
-def right(x):
-    delay = ((x - 325) / (500 - 325)) / 5
-    print(x,delay)
+def right(pos_x):
+    delay = ((pos_x - 325) / (500 - 325)) / 5
+    print(pos_x,delay)
     sleep(delay)
     MIDLOCK.acquire()
     LOCK.acquire()
@@ -47,9 +47,9 @@ def right(x):
     sleep(LANE_LOCK_DELAY)
     MIDLOCK.release()
 
-def down(x):
-    delay = ((x - 325) / (500 - 325)) / 5
-    print(x,delay)
+def down(pos_x):
+    delay = ((pos_x - 325) / (500 - 325)) / 5
+    print(pos_x,delay)
     sleep(delay)
     BOTLOCK.acquire()
     LOCK.acquire()
@@ -63,7 +63,7 @@ def capture_image():
     # HSV Red bounds
     lower = (110, 100, 100)
     higher = (130, 255, 255)
-    x = botright[0] - topleft[0]
+    pos_x = botright[0] - topleft[0]
     y = botright[1] - topleft[1]
 
     while True:
@@ -90,17 +90,17 @@ def capture_image():
         if len(cnts) > 0:
             for contour in cnts:
                 # Find coordinates and start threads
-                ((x, y), radius) = cv2.minEnclosingCircle(contour)
-                if x <= 500 and x >= 325 and y <= 180:
-                    t = threading.Thread(name='thread_top', target=top, args=(x,))
+                ((pos_x, y), radius) = cv2.minEnclosingCircle(contour)
+                if pos_x <= 500 and pos_x >= 325 and y <= 180:
+                    t = threading.Thread(name='thread_top', target=top, args=(pos_x,))
                     t.setDaemon(True)
                     t.start()
-                elif x <= 500 and x >= 325 and y > 180 and y < 260:
-                    t = threading.Thread(name='thread_right', target=right, args=(x,))
+                elif pos_x <= 500 and pos_x >= 325 and y > 180 and y < 260:
+                    t = threading.Thread(name='thread_right', target=right, args=(pos_x,))
                     t.setDaemon(True)
                     t.start()
-                elif x <= 500 and x >= 325 and y >= 260:
-                    t = threading.Thread(name='thread_down', target=down, args=(x,))
+                elif pos_x <= 500 and pos_x >= 325 and y >= 260:
+                    t = threading.Thread(name='thread_down', target=down, args=(pos_x,))
                     t.setDaemon(True)
                     t.start()
 
@@ -110,19 +110,19 @@ class CaptureRectangle(PyMouseEvent):
         PyMouseEvent.__init__(self)
         self.clicks = 0
 
-    def click(self, x, y, button, press):
+    def click(self, pos_x, y, button, press):
         if button == 1:
             if press:
                 print("Click")
                 if self.clicks == 0:
                     print("Top left corner")
                     global topleft
-                    topleft = (x, y)
+                    topleft = (pos_x, y)
                     self.clicks += 1
                 elif self.clicks == 1:
                     print("Bottom Right corner")
                     global botright
-                    botright = (x, y)
+                    botright = (pos_x, y)
                     self.stop()
         else:
             self.stop()
