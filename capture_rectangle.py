@@ -38,10 +38,11 @@ class CaptureRectangle(PyMouseEvent):
 
 def print_coordinates(capture_rectangle):
     """Print coordinates of a capture rectangle"""
-    print(capture_rectangle.topleft[0])
-    print(capture_rectangle.topleft[1])
-    print(capture_rectangle.botright[0])
-    print(capture_rectangle.botright[1])
+    with open("coordinates.txt", "w") as file:
+        file.write(str(capture_rectangle.topleft[0]) + "\n")
+        file.write(str(capture_rectangle.topleft[1]) + "\n")
+        file.write(str(capture_rectangle.botright[0]) + "\n")
+        file.write(str(capture_rectangle.botright[1]) + "\n")
     sys.exit(0)
 
 if __name__ == "__main__":
