@@ -114,11 +114,12 @@ def capture_image(capture_rectangle):
 
 class CaptureRectangle(PyMouseEvent):
     """Identify the corners that capture_image is going to use in order to deal with the image"""
-    def __init__(self):
+    def __init__(self, stop_action):
         PyMouseEvent.__init__(self)
         self.clicks = 0
         self.topleft = (0, 0)
         self.botright = (0, 0)
+        self.stop_action = stop_action
 
     def click(self, x, y, button, press):
         if button == 1:
@@ -138,9 +139,9 @@ class CaptureRectangle(PyMouseEvent):
     def stop(self):
         print(self.topleft[0], self.topleft[1])
         print(self.botright[0], self.botright[1])
-        capture_image(self)
+        self.stop_action(self)
         PyMouseEvent.stop(self)
 
 signal.signal(signal.SIGINT, signal_handler)
-CAPTURE_RECTANGLE = CaptureRectangle()
+CAPTURE_RECTANGLE = CaptureRectangle(capture_image)
 CAPTURE_RECTANGLE.run()
