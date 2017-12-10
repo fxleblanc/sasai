@@ -20,6 +20,9 @@ TOPLOCK = threading.Lock()
 MIDLOCK = threading.Lock()
 BOTLOCK = threading.Lock()
 
+# Capture delay timer
+CAPTURE_DELAY = 0.00005
+
 def start_actions_from_contours(cnts):
     """Start action threads from contours positions"""
     cnts_len = len(cnts)
@@ -129,6 +132,7 @@ def capture_image(capture_rectangle):
         # Find contours
         cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
         start_actions_from_contours(cnts)
+        sleep(CAPTURE_DELAY)
 
 
 signal.signal(signal.SIGINT, signal_handler)
