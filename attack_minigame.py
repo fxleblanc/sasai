@@ -23,23 +23,27 @@ BOTLOCK = threading.Lock()
 def start_actions_from_contours(cnts):
     """Start action threads from contours positions"""
     cnts_len = len(cnts)
+
+    # Bounds of contour capture
+    right_bound = 500
     if cnts_len > 0:
         for contour in cnts:
             # Find coordinates and start threads
             circle = cv2.minEnclosingCircle(contour)
             cnt_pos_x = circle[0][0]
             cnt_pos_y = circle[0][1]
-            if cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y <= 180:
+            if cnt_pos_x <= right_bound and cnt_pos_x >= 325 and cnt_pos_y <= 180:
                 action_thread = threading.Thread(name='thread_top',
                                                  target=top, args=(cnt_pos_x,))
                 action_thread.setDaemon(True)
                 action_thread.start()
-            elif cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y > 180 and cnt_pos_y < 260:
+            elif (cnt_pos_x <= right_bound and cnt_pos_x >= 325 and
+                  cnt_pos_y > 180 and cnt_pos_y < 260):
                 action_thread = threading.Thread(name='thread_right',
                                                  target=right, args=(cnt_pos_x,))
                 action_thread.setDaemon(True)
                 action_thread.start()
-            elif cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y >= 260:
+            elif cnt_pos_x <= right_bound and cnt_pos_x >= 325 and cnt_pos_y >= 260:
                 action_thread = threading.Thread(name='thread_down',
                                                  target=down, args=(cnt_pos_x,))
                 action_thread.setDaemon(True)
