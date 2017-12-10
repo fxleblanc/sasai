@@ -6,3 +6,6 @@ env
 
 # Python compiled files
 *.pyc
+
+# Coordinates file
+coordinates.txt
