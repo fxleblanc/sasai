@@ -67,8 +67,6 @@ def capture_image(capture_rectangle):
     # HSV Red bounds
     lower = (110, 100, 100)
     higher = (130, 255, 255)
-    pos_x = capture_rectangle.botright[0] - capture_rectangle.topleft[0]
-    pos_y = capture_rectangle.botright[1] - capture_rectangle.topleft[1]
 
     while True:
         # Get the image and transform it in a numpy array
