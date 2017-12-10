@@ -15,7 +15,7 @@ k = PyKeyboard()
 LOCK = threading.Lock()
 
 # Lane Lock to prevent spamming in one direction at the detriment of other directions
-LANE_LOCK_DELAY = 0.35
+LANE_LOCK_DELAY = 0.30
 TOPLOCK = threading.Lock()
 MIDLOCK = threading.Lock()
 BOTLOCK = threading.Lock()
@@ -79,7 +79,7 @@ def right(pos_x):
     if pos_x > 400:
         delay = 0.190
     else:
-        delay = 0.150
+        delay = 0.160
     print(pos_x, delay)
     sleep(delay)
     MIDLOCK.acquire()
@@ -94,7 +94,7 @@ def down(pos_x):
     if pos_x > 400:
         delay = 0.190
     else:
-        delay = 0.150
+        delay = 0.160
     print(pos_x, delay)
     sleep(delay)
     BOTLOCK.acquire()
