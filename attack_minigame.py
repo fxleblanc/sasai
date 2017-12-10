@@ -97,7 +97,8 @@ def capture_image():
                     action_thread.setDaemon(True)
                     action_thread.start()
                 elif pos_x <= 500 and pos_x >= 325 and pos_y > 180 and pos_y < 260:
-                    action_thread = threading.Thread(name='thread_right', target=right, args=(pos_x,))
+                    action_thread = threading.Thread(name='thread_right',
+                                                     target=right, args=(pos_x,))
                     action_thread.setDaemon(True)
                     action_thread.start()
                 elif pos_x <= 500 and pos_x >= 325 and pos_y >= 260:
