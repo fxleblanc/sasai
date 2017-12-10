@@ -3,3 +3,6 @@ env
 
 # Vscode
 .vscode
+
+# Python compiled files
+*.pyc
