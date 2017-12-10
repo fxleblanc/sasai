@@ -12,7 +12,7 @@ import numpy as np
 
 k = PyKeyboard()
 # Lock for each delay
-lock = threading.Lock()
+LOCK = threading.Lock()
 
 # Lane Lock to prevent spamming in one direction at the detriment of other directions
 lane_lock_delay = 0.3
@@ -30,9 +30,9 @@ def top(x):
     print(x,delay)
     sleep(delay)
     toplock.acquire()
-    lock.acquire()
+    LOCK.acquire()
     k.tap_key('Up')
-    lock.release()
+    LOCK.release()
     sleep(lane_lock_delay)
     toplock.release()
 
@@ -41,9 +41,9 @@ def right(x):
     print(x,delay)
     sleep(delay)
     midlock.acquire()
-    lock.acquire()
+    LOCK.acquire()
     k.tap_key('Right')
-    lock.release()
+    LOCK.release()
     sleep(lane_lock_delay)
     midlock.release()
 
@@ -52,9 +52,9 @@ def down(x):
     print(x,delay)
     sleep(delay)
     botlock.acquire()
-    lock.acquire()
+    LOCK.acquire()
     k.tap_key('Down')
-    lock.release()
+    LOCK.release()
     sleep(lane_lock_delay)
     botlock.release()
 
