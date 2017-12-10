@@ -64,7 +64,7 @@ def capture_image():
     lower = (110, 100, 100)
     higher = (130, 255, 255)
     pos_x = botright[0] - topleft[0]
-    y = botright[1] - topleft[1]
+    pos_y = botright[1] - topleft[1]
 
     while True:
         # Get the image and transform it in a numpy array
@@ -91,15 +91,15 @@ def capture_image():
             for contour in cnts:
                 # Find coordinates and start threads
                 ((pos_x, y), radius) = cv2.minEnclosingCircle(contour)
-                if pos_x <= 500 and pos_x >= 325 and y <= 180:
+                if pos_x <= 500 and pos_x >= 325 and pos_y <= 180:
                     t = threading.Thread(name='thread_top', target=top, args=(pos_x,))
                     t.setDaemon(True)
                     t.start()
-                elif pos_x <= 500 and pos_x >= 325 and y > 180 and y < 260:
+                elif pos_x <= 500 and pos_x >= 325 and pos_y > 180 and pos_y < 260:
                     t = threading.Thread(name='thread_right', target=right, args=(pos_x,))
                     t.setDaemon(True)
                     t.start()
-                elif pos_x <= 500 and pos_x >= 325 and y >= 260:
+                elif pos_x <= 500 and pos_x >= 325 and pos_y >= 260:
                     t = threading.Thread(name='thread_down', target=down, args=(pos_x,))
                     t.setDaemon(True)
                     t.start()
