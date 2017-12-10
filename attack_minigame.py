@@ -78,9 +78,9 @@ def top(pos_x):
 def right(pos_x):
     """Right attack"""
     if pos_x > 400:
-        delay = 0.2
+        delay = 0.25
     else:
-        delay = 0.160
+        delay = 0.175
     print(pos_x, delay)
     sleep(delay)
     MIDLOCK.acquire()
@@ -93,9 +93,9 @@ def right(pos_x):
 def down(pos_x):
     """Down attack"""
     if pos_x > 400:
-        delay = 0.2
+        delay = 0.25
     else:
-        delay = 0.160
+        delay = 0.175
     print(pos_x, delay)
     sleep(delay)
     BOTLOCK.acquire()
