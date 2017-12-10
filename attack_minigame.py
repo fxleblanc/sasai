@@ -113,19 +113,19 @@ class CaptureRectangle(PyMouseEvent):
         PyMouseEvent.__init__(self)
         self.clicks = 0
 
-    def click(self, pos_x, y, button, press):
+    def click(self, pos_x, pos_y, button, press):
         if button == 1:
             if press:
                 print("Click")
                 if self.clicks == 0:
                     print("Top left corner")
                     global topleft
-                    topleft = (pos_x, y)
+                    topleft = (pos_x, pos_y)
                     self.clicks += 1
                 elif self.clicks == 1:
                     print("Bottom Right corner")
                     global botright
-                    botright = (pos_x, y)
+                    botright = (pos_x, pos_y)
                     self.stop()
         else:
             self.stop()
