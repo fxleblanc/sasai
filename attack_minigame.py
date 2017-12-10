@@ -87,7 +87,8 @@ def capture_image():
 
         # Find contours
         cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
-        if len(cnts) > 0:
+        cnts_len = len(cnts)
+        if cnts_len > 0:
             for contour in cnts:
                 # Find coordinates and start threads
                 ((pos_x, y), radius) = cv2.minEnclosingCircle(contour)
