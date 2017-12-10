@@ -79,7 +79,6 @@ def capture_image():
 
         # Apply Gaussian blur and hsv color conversion
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
-        rgb = cv2.cvtColor(blurred, cv2.COLOR_BGR2RGB)
 
         # Find a mask using the lower and higher bounds
         mask = cv2.inRange(hsv, lower, higher)
