@@ -25,8 +25,8 @@ def start_actions_from_contours(cnts):
     cnts_len = len(cnts)
 
     # Bounds of contour capture
-    right_bound = 500
-    left_bound = 325
+    right_bound = 525
+    left_bound = 350
 
     if cnts_len > 0:
         for contour in cnts:
@@ -58,7 +58,7 @@ def signal_handler():
 
 def top(pos_x):
     """Top attack"""
-    delay = 0.25
+    delay = 0.3
     print(pos_x, delay)
     sleep(delay)
     TOPLOCK.acquire()
@@ -70,7 +70,7 @@ def top(pos_x):
 
 def right(pos_x):
     """Right attack"""
-    delay = 0.1
+    delay = 0.190
     print(pos_x, delay)
     sleep(delay)
     MIDLOCK.acquire()
@@ -82,7 +82,7 @@ def right(pos_x):
 
 def down(pos_x):
     """Down attack"""
-    delay = 0.1
+    delay = 0.190
     print(pos_x, delay)
     sleep(delay)
     BOTLOCK.acquire()
