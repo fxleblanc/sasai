@@ -3,6 +3,7 @@ import sys
 import threading
 from time import sleep
 import signal
+import os.path
 
 from pykeyboard import PyKeyboard
 import pyscreenshot as ImageGrab
@@ -136,5 +137,18 @@ def capture_image(capture_rectangle):
 
 
 signal.signal(signal.SIGINT, signal_handler)
-CAPTURE_RECTANGLE = CaptureRectangle(capture_image)
-CAPTURE_RECTANGLE.run()
+if os.path.isfile("coordinates.txt"):
+    print("Using coordinates.txt")
+    with open("coordinates.txt", "r") as file:
+        CAPTURE_RECTANGLE = CaptureRectangle(capture_image)
+        TOPLEFT_X = file.readline()
+        print(TOPLEFT_X)
+        TOPLEFT_Y = file.readline()
+        BOTRIGHT_X = file.readline()
+        BOTRIGHT_Y = file.readline()
+        CAPTURE_RECTANGLE.topleft = (int(TOPLEFT_X), int(TOPLEFT_Y))
+        CAPTURE_RECTANGLE.botright = (int(BOTRIGHT_X), int(BOTRIGHT_Y))
+        capture_image(CAPTURE_RECTANGLE)
+else:
+    CAPTURE_RECTANGLE = CaptureRectangle(capture_image)
+    CAPTURE_RECTANGLE.run()
