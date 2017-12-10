@@ -140,5 +140,5 @@ class CaptureRectangle(PyMouseEvent):
         PyMouseEvent.stop(self)
 
 signal.signal(signal.SIGINT, signal_handler)
-captureRectangle = CaptureRectangle()
-captureRectangle.run()
+CAPTURE_RECTANGLE = CaptureRectangle()
+CAPTURE_RECTANGLE.run()
