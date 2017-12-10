@@ -77,7 +77,7 @@ def top(pos_x):
 def right(pos_x):
     """Right attack"""
     if pos_x > 400:
-        delay = 0.2
+        delay = 0.190
     else:
         delay = 0.150
     print(pos_x, delay)
@@ -92,7 +92,7 @@ def right(pos_x):
 def down(pos_x):
     """Down attack"""
     if pos_x > 400:
-        delay = 0.2
+        delay = 0.190
     else:
         delay = 0.150
     print(pos_x, delay)
