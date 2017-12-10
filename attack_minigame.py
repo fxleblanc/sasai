@@ -1,13 +1,14 @@
 """Python module to play the strength minigame"""
-from pymouse import PyMouseEvent
-from pykeyboard import PyKeyboard
-from time import sleep
-import pyscreenshot as ImageGrab
-import cv2
-import signal
-import numpy as np
 import sys
 import threading
+from time import sleep
+import signal
+
+from pymouse import PyMouseEvent
+from pykeyboard import PyKeyboard
+import pyscreenshot as ImageGrab
+import cv2
+import numpy as np
 
 k = PyKeyboard()
 # Lock for each delay
