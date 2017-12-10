@@ -25,8 +25,8 @@ def start_actions_from_contours(cnts):
     cnts_len = len(cnts)
 
     # Bounds of contour capture
-    right_bound = 525
-    left_bound = 350
+    right_bound = 500
+    left_bound = 375
 
     if cnts_len > 0:
         for contour in cnts:
