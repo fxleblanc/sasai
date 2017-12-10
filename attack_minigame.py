@@ -91,7 +91,7 @@ def capture_image():
         if cnts_len > 0:
             for contour in cnts:
                 # Find coordinates and start threads
-                ((pos_x, y), radius) = cv2.minEnclosingCircle(contour)
+                ((pos_x, pos_y), radius) = cv2.minEnclosingCircle(contour)
                 if pos_x <= 500 and pos_x >= 325 and pos_y <= 180:
                     t = threading.Thread(name='thread_top', target=top, args=(pos_x,))
                     t.setDaemon(True)
