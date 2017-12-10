@@ -98,7 +98,8 @@ def capture_image(capture_rectangle):
                 cnt_pos_x = circle[0][0]
                 cnt_pos_y = circle[0][1]
                 if cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y <= 180:
-                    action_thread = threading.Thread(name='thread_top', target=top, args=(cnt_pos_x,))
+                    action_thread = threading.Thread(name='thread_top',
+                                                     target=top, args=(cnt_pos_x,))
                     action_thread.setDaemon(True)
                     action_thread.start()
                 elif cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y > 180 and cnt_pos_y < 260:
@@ -107,7 +108,8 @@ def capture_image(capture_rectangle):
                     action_thread.setDaemon(True)
                     action_thread.start()
                 elif cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y >= 260:
-                    action_thread = threading.Thread(name='thread_down', target=down, args=(cnt_pos_x,))
+                    action_thread = threading.Thread(name='thread_down',
+                                                     target=down, args=(cnt_pos_x,))
                     action_thread.setDaemon(True)
                     action_thread.start()
 
