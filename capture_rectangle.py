@@ -2,6 +2,8 @@
 Capture rectangle module.
 Captures a rectangle in your screen and invokes a method that uses those coordinates
 """
+import sys
+
 from pymouse import PyMouseEvent
 
 class CaptureRectangle(PyMouseEvent):
@@ -33,3 +35,15 @@ class CaptureRectangle(PyMouseEvent):
         print(self.botright[0], self.botright[1])
         self.stop_action(self)
         PyMouseEvent.stop(self)
+
+def print_coordinates(capture_rectangle):
+    """Print coordinates of a capture rectangle"""
+    print(capture_rectangle.topleft[0])
+    print(capture_rectangle.topleft[1])
+    print(capture_rectangle.botright[0])
+    print(capture_rectangle.botright[1])
+    sys.exit(0)
+
+if __name__ == "__main__":
+    CAPTURE_RECTANGLE = CaptureRectangle(print_coordinates)
+    CAPTURE_RECTANGLE.run()
