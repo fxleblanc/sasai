@@ -61,18 +61,21 @@ def down(pos_x):
     sleep(LANE_LOCK_DELAY)
     BOTLOCK.release()
 
-def capture_image():
+def capture_image(capture_rectangle):
     """Capture image, detect apples and launch thread for the appropriate direction"""
 
     # HSV Red bounds
     lower = (110, 100, 100)
     higher = (130, 255, 255)
-    pos_x = botright[0] - topleft[0]
-    pos_y = botright[1] - topleft[1]
+    pos_x = capture_rectangle.botright[0] - capture_rectangle.topleft[0]
+    pos_y = capture_rectangle.botright[1] - capture_rectangle.topleft[1]
 
     while True:
         # Get the image and transform it in a numpy array
-        img = ImageGrab.grab(bbox=(topleft[0], topleft[1], botright[0], botright[1]))
+        img = ImageGrab.grab(bbox=(capture_rectangle.topleft[0],
+                                   capture_rectangle.topleft[1],
+                                   capture_rectangle.botright[0],
+                                   capture_rectangle.botright[1]))
         img_np = np.array(img)
         img_crop = img_np[150:500, 100:600]
         blurred = cv2.GaussianBlur(img_crop, (11, 11), 0)
@@ -112,6 +115,8 @@ class CaptureRectangle(PyMouseEvent):
     def __init__(self):
         PyMouseEvent.__init__(self)
         self.clicks = 0
+        self.topleft = (0, 0)
+        self.botright = (0, 0)
 
     def click(self, x, y, button, press):
         if button == 1:
@@ -119,21 +124,19 @@ class CaptureRectangle(PyMouseEvent):
                 print("Click")
                 if self.clicks == 0:
                     print("Top left corner")
-                    global topleft
-                    topleft = (x, y)
+                    self.topleft = (x, y)
                     self.clicks += 1
                 elif self.clicks == 1:
                     print("Bottom Right corner")
-                    global botright
-                    botright = (x, y)
+                    self.botright = (x, y)
                     self.stop()
         else:
             self.stop()
 
     def stop(self):
-        print(topleft[0], topleft[1])
-        print(botright[0], botright[1])
-        capture_image()
+        print(self.topleft[0], self.topleft[1])
+        print(self.botright[0], self.botright[1])
+        capture_image(self)
         PyMouseEvent.stop(self)
 
 signal.signal(signal.SIGINT, signal_handler)
