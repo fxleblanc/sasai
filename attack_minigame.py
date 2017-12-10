@@ -85,9 +85,6 @@ def capture_image():
         mask = cv2.erode(mask, None, iterations=2)
         mask = cv2.dilate(mask, None, iterations=2)
 
-        # Apply mask
-        res = cv2.bitwise_and(hsv, hsv, mask = mask)
-
         # Find contours
         cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
         if len(cnts) > 0:
