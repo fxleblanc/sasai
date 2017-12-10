@@ -26,6 +26,7 @@ def signal_handler():
     sys.exit(0)
 
 def top(pos_x):
+    """Top attack"""
     delay = ((pos_x - 325) / (500 - 325)) / 5
     print(pos_x,delay)
     sleep(delay)
@@ -37,6 +38,7 @@ def top(pos_x):
     TOPLOCK.release()
 
 def right(pos_x):
+    """Right attack"""
     delay = ((pos_x - 325) / (500 - 325)) / 5
     print(pos_x,delay)
     sleep(delay)
@@ -48,6 +50,7 @@ def right(pos_x):
     MIDLOCK.release()
 
 def down(pos_x):
+    """Down attack"""
     delay = ((pos_x - 325) / (500 - 325)) / 5
     print(pos_x,delay)
     sleep(delay)
