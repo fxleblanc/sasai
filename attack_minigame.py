@@ -1,3 +1,4 @@
+"""Python module to play the strength minigame"""
 from pymouse import PyMouseEvent
 from pykeyboard import PyKeyboard
 from time import sleep
