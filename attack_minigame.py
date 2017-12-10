@@ -94,18 +94,18 @@ def capture_image(capture_rectangle):
         if cnts_len > 0:
             for contour in cnts:
                 # Find coordinates and start threads
-                ((pos_x, pos_y)) = cv2.minEnclosingCircle(contour)
-                if pos_x <= 500 and pos_x >= 325 and pos_y <= 180:
-                    action_thread = threading.Thread(name='thread_top', target=top, args=(pos_x,))
+                (cnt_pos_x, cnt_pos_y) = cv2.minEnclosingCircle(contour)
+                if cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y <= 180:
+                    action_thread = threading.Thread(name='thread_top', target=top, args=(cnt_pos_x,))
                     action_thread.setDaemon(True)
                     action_thread.start()
-                elif pos_x <= 500 and pos_x >= 325 and pos_y > 180 and pos_y < 260:
+                elif cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y > 180 and cnt_pos_y < 260:
                     action_thread = threading.Thread(name='thread_right',
-                                                     target=right, args=(pos_x,))
+                                                     target=right, args=(cnt_pos_x,))
                     action_thread.setDaemon(True)
                     action_thread.start()
-                elif pos_x <= 500 and pos_x >= 325 and pos_y >= 260:
-                    action_thread = threading.Thread(name='thread_down', target=down, args=(pos_x,))
+                elif cnt_pos_x <= 500 and cnt_pos_x >= 325 and cnt_pos_y >= 260:
+                    action_thread = threading.Thread(name='thread_down', target=down, args=(cnt_pos_x,))
                     action_thread.setDaemon(True)
                     action_thread.start()
 
