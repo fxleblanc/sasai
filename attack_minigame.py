@@ -21,7 +21,7 @@ MIDLOCK = threading.Lock()
 BOTLOCK = threading.Lock()
 
 # Capture delay timer
-CAPTURE_DELAY = 0.00001
+CAPTURE_DELAY = 0.000005
 
 def start_actions_from_contours(cnts):
     """Start action threads from contours positions"""
