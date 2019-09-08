@@ -22,5 +22,11 @@ Launch the program
 ```
 python attack-minigame.py
 ```
+Use other files to launch other mini-games
+```
+crit_minigame.py
+def_minigame.py
+dodge_minigame.py
+```
 
 Click on the top left corner of the Flash game screen, then the bottom right. Then, click inside the Flash game screen to put the focus in it. The program should output coordinates with delays in the terminal screen.

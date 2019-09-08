@@ -11,11 +11,14 @@ class CaptureRectangle(PyMouseEvent):
     def __init__(self, stop_action):
         PyMouseEvent.__init__(self)
         self.clicks = 0
-        self.topleft = (0, 0)
-        self.botright = (0, 0)
+        self.topleft = (400, 287)
+        self.botright = (1200, 887)
         self.stop_action = stop_action
 
-    def click(self, x, y, button, press):
+    """
+	def click(self, x, y, button, press):
+    	print("!wait")
+    	print(button)
         if button == 1:
             if press:
                 print("Click")
@@ -29,7 +32,7 @@ class CaptureRectangle(PyMouseEvent):
                     self.stop()
         else:
             self.stop()
-
+"""
     def stop(self):
         print(self.topleft[0], self.topleft[1])
         print(self.botright[0], self.botright[1])
@@ -37,6 +40,7 @@ class CaptureRectangle(PyMouseEvent):
         PyMouseEvent.stop(self)
 
 def print_coordinates(capture_rectangle):
+    print("!Print in file!")
     """Print coordinates of a capture rectangle"""
     with open("coordinates.txt", "w") as file:
         file.write(str(capture_rectangle.topleft[0]) + "\n")
